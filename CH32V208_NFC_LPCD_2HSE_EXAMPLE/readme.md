@@ -1,15 +1,8 @@
-# CH32-NFC-EVT
+# CH32V208 NFC双晶振低功耗检卡操作例程
 
-NFC-EVT是沁恒微电子在CH32通用系列单片机上实现的无需额外芯片的NFC读写方案。
+本readme采用markdown语法。如果离线查看，推荐使用`VSCode`，配合`Markdown Preview Enhanced`插件进行预览，即可阅读查看。
 
-## 支持芯片
-
-[**CH32V003**](./CH32V003_NFC_PCD/readme.md)
-[**CH32V20x**](./CH32V20x_NFC_PCD/readme.md)
-[**CH32V30x**](./CH32V30x_NFC_PCD/readme.md)
-[**CH32F20x**](./CH32F20x_NFC_PCD/readme.md)
-
-## CH32 NFC原理概述
+## CH32V208 NFC原理概述
 
 NFC操作代码位于工程目录中`Drivers/NFC_Reader`目录下。
 
@@ -21,9 +14,11 @@ DMA通道为该通用定时器更新事件所对应的DMA通道。
 
 在波形发送完成后，通用定时器切换到接收模式，进行接收。
 
-## LPCD低功耗检卡
+## NFC LPCD低功耗检测卡实现原理
 
-LPCD低功耗检卡参考[CH32V208 NFC双晶振低功耗检卡操作例程](./CH32V208_NFC_LPCD_2HSE_EXAMPLE/readme.md)。
+LPCD低功耗检卡是在蓝牙周期性广播后，使用通过`96Mhz`主频分出的不标准的`13.71Mhz`波形往天线发送，然后检测放大器正向输入引脚的平均ADC值。
+所以芯片集成放大器的正向输入端必须也是ADC采集端口，以满足使用ADC采集能量信号来判断是否有卡接近。
+不同的天线，电路板可能值不同，所以需要有阈值校准操作。
 
 ## 硬件相关注意事项
 
