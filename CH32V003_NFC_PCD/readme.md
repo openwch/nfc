@@ -1,5 +1,7 @@
 # CH32V003 NFC工程
 
+本工程对应原理图为[**CH32V003-NFC-EVT**](../Sch&PCB/CH32V003-NFC-EVT)
+
 ## 本工程相对于原版EVT工程修改点
 
 ### HSE_VALUE
@@ -14,5 +16,6 @@
 
 1. CH32V003只有一个放大器且输出不可选，所以在`NFC_Reader_bsp.h`中，删除了`NFC_OPA`和`NFC_OPA_MODE`的宏定义，并且在`NFC_Reader.c`中，原先的`OPA_Cmd(NFC_OPA, ENABLE);`改为`OPA_Cmd(ENABLE);`。
 2. CH32V003只有两个定时器`TIM1`和`TIM2`，所以在`NFC_Reader_bsp.c`中，删除了一些宏判断。用户如需要定时器功能，可以使用`Systick`。
+3. CH32V003引脚有复用，默认例程中TIM1引脚映射配置为全映射。
 
 ## [返回主readme](../readme.md)

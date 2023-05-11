@@ -2,6 +2,8 @@
 
 本readme采用markdown语法。如果离线查看，推荐使用`VSCode`，配合`Markdown Preview Enhanced`插件进行预览，即可阅读查看。
 
+本工程对应原理图为[**CH32V208W-NFC**](../Sch&PCB/CH32V208W-NFC)
+
 ## CH32V208 NFC原理概述
 
 NFC操作代码位于工程目录中`Drivers/NFC_Reader`目录下。

@@ -1,5 +1,7 @@
 # CH32F20x NFC工程
 
+本工程对应原理图为[**CH32FVx0xR-NFC-EVT**](../Sch&PCB/CH32FVx0xR-NFC-EVT)
+
 ## 本工程相对于原版EVT工程修改点
 
 ### HSE_VALUE
