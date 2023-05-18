@@ -341,7 +341,7 @@ nfc_exit:
  */
 void changeHSETo27_12Mhz(void)
 {
-    __IO uint32_t StartUpCounter, HSEStatus = 0;
+    __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
 
 #if(DEBUG)
     PRINT("27.12 s\n");
@@ -370,9 +370,6 @@ void changeHSETo27_12Mhz(void)
     __asm volatile ("nop");
     __asm volatile ("nop");
     __asm volatile ("nop");
-
-    // 27.12M晶振匹配电容和电流
-    OSC->HSE_CAL_CTRL &= ~(0x07<<28);
 
     GPIO_SetBits(GPIOC, GPIO_Pin_13);
 
@@ -444,7 +441,7 @@ void changeHSETo27_12Mhz(void)
  */
 void changeHSETo32Mhz(void)
 {
-    __IO uint32_t StartUpCounter, HSEStatus = 0;
+    __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
 
 #if(DEBUG)
     PRINT("32 s\n");
@@ -473,10 +470,6 @@ void changeHSETo32Mhz(void)
     __asm volatile ("nop");
     __asm volatile ("nop");
     __asm volatile ("nop");
-
-    // 32M 20pf晶振匹配电容和电流
-    OSC->HSE_CAL_CTRL &= ~(0x07<<28);
-    OSC->HSE_CAL_CTRL |= 0x04<<28;
 
     GPIO_ResetBits(GPIOC, GPIO_Pin_13);
 
