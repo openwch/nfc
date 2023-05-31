@@ -24,6 +24,8 @@ DMA通道为该通用定时器更新事件所对应的DMA通道。
 
 在波形发送完成后，通用定时器切换到接收模式，进行接收。
 
+![NFC结构图](./docs/img/nfc-structure.png)
+
 ## LPCD低功耗检卡
 
 LPCD低功耗检卡参考[CH32V208 NFC双晶振低功耗检卡操作例程](./CH32V208_NFC_LPCD_2HSE_EXAMPLE/readme.md)。

@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
  * File Name          : NFC_Reader_bsp.c
  * Author             : WCH
- * Version            : V1.1
- * Date               : 2023/05/08
+ * Version            : V1.2
+ * Date               : 2023/05/31
  * Description        : NFC硬件底层初始化，使用TS位设置主从定时器同步控制波形
  * Copyright (c) 2023 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
@@ -397,6 +397,9 @@ TIMx_IRQ_DEF(CTRL_REC_TIM)
 {
     if (TIMx(CTRL_REC_TIM)->CCER == 0)
     {
+#if MAIN_PWM_TIM_USE_CCER!=0
+        TIMx(MAIN_PWM_TIM)->CCER ^= ((0x0005) << ((MAIN_PWM_TIM_CCx - 1) * 4));
+#else
 #if (MAIN_PWM_TIM_CCx == 1)
         TIMx(MAIN_PWM_TIM)->CHCTLR1 ^= 0x0040;
 #elif (MAIN_PWM_TIM_CCx == 2)
@@ -405,6 +408,7 @@ TIMx_IRQ_DEF(CTRL_REC_TIM)
         TIMx(MAIN_PWM_TIM)->CHCTLR2 ^= 0x0040;
 #elif (MAIN_PWM_TIM_CCx == 4)
         TIMx(MAIN_PWM_TIM)->CHCTLR2 ^= 0x4000;
+#endif
 #endif
     }
     else
