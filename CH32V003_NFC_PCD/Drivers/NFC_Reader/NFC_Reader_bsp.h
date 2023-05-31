@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
  * File Name          : NFC_Reader_bsp.h
  * Author             : WCH
- * Version            : V1.1
- * Date               : 2023/05/08
+ * Version            : V1.2
+ * Date               : 2023/05/31
  * Description        : NFC硬件底层初始化
  * Copyright (c) 2023 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
@@ -23,6 +23,7 @@
 #define MAIN_PWM_TIM_CHx_PIN        GPIO_Pin_4      /* 发送的nfc基本波形的高级定时器的通道对应的GPIO PIN */
 #define MAIN_PWM_TIM_CHxN_GPIOx     GPIOC           /* 发送的nfc基本波形的高级定时器的互补通道对应的GPIO组 */
 #define MAIN_PWM_TIM_CHxN_PIN       GPIO_Pin_3      /* 发送的nfc基本波形的高级定时器的互补通道对应的GPIO PIN */
+#define MAIN_PWM_TIM_USE_CCER       1               /* 开关发送的PWM波形时使用MAIN_PWM_TIM的CCER还是CHCTLRx */
 
 #define CTRL_REC_TIM                2               /* 发送和接收载波的定时器，2即为TIM2 */
 #define TIM_NFC_REC_CCx             1               /* 接收载波的定时器捕获通道 */
