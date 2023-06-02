@@ -3,14 +3,14 @@
  * Author             : WCH
  * Version            : V1.2
  * Date               : 2023/05/31
- * Description        : NFCÓ²¼þµ×²ã³õÊ¼»¯£¬Ê¹ÓÃTSÎ»ÉèÖÃÖ÷´Ó¶¨Ê±Æ÷Í¬²½¿ØÖÆ²¨ÐÎ
+ * Description        : NFCç¡¬ä»¶åº•å±‚åˆå§‹åŒ–ï¼Œä½¿ç”¨TSä½è®¾ç½®ä¸»ä»Žå®šæ—¶å™¨åŒæ­¥æŽ§åˆ¶æ³¢å½¢
  * Copyright (c) 2023 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
  *******************************************************************************/
 
 #include "NFC_Reader_bsp.h"
 
-/* Ã¿¸öÎÄ¼þµ¥¶Àdebug´òÓ¡µÄ¿ª¹Ø£¬ÖÃ0¿ÉÒÔ½ûÖ¹±¾ÎÄ¼þÄÚ²¿´òÓ¡ */
+/* æ¯ä¸ªæ–‡ä»¶å•ç‹¬debugæ‰“å°çš„å¼€å…³ï¼Œç½®0å¯ä»¥ç¦æ­¢æœ¬æ–‡ä»¶å†…éƒ¨æ‰“å° */
 #define DEBUG_PRINT_IN_THIS_FILE 0
 #if DEBUG_PRINT_IN_THIS_FILE
     #define PRINTF(...) printf_(__VA_ARGS__)
@@ -33,7 +33,7 @@
 #elif (NFC_SYS_FREQUENCY >= 20000000) && (NFC_SYS_FREQUENCY < 40000000)     /* 27.12Mhz */
 #define TIM_NFC_REC_CHCTLRx         0x81
 #else
-#error "NFC_SYS_FREQUENCY NOT SUPPORTTED!"                                  /* ÆäËû²»±ê×¼²¨ÐÎ£¬·Ç±ØÒª¾¡Á¿²»ÒªÊ¹ÓÃ */
+#error "NFC_SYS_FREQUENCY NOT SUPPORTTED!"                                  /* å…¶ä»–ä¸æ ‡å‡†æ³¢å½¢ï¼Œéžå¿…è¦å°½é‡ä¸è¦ä½¿ç”¨ */
 #endif
 
 #define TIM_REC_PSC_LOAD            ((NFC_SYS_FREQUENCY - 1000000) / 2000000)
@@ -42,7 +42,7 @@
 #define TIM_REC_STEP_LOAD           (NFC_OVER_TIME_STEP * (NFC_SYS_FREQUENCY / (TIM_REC_PSC_LOAD + 1)) / 1000)
 #define TIM_REC_CCER_LOAD           ((0x0001) << ((TIM_NFC_REC_CCx-1)*4))
 
-/* nfcÐÅºÅ¿ØÖÆ½á¹¹Ìå */
+/* nfcä¿¡å·æŽ§åˆ¶ç»“æž„ä½“ */
 volatile nfc_pcd_signal_data_t g_nfc_pcd_signal_data;
 
 /*********************************************************************
@@ -156,7 +156,7 @@ void NFC_PWMOut_Init(u16 arr, u16 psc, u16 ccp)
 #elif (MAIN_PWM_TIM_CCx == 3)
     TIMx(MAIN_PWM_TIM)->CHCTLR2 = 0x0060;
 #elif (MAIN_PWM_TIM_CCx == 4)
-    TIMx(MAIN_PWM_TIM)->CHCTLR1 = 0x6000;
+    TIMx(MAIN_PWM_TIM)->CHCTLR2 = 0x6000;
 #endif
 
     TIMx(MAIN_PWM_TIM)->CCER = ((0x0005) << ((MAIN_PWM_TIM_CCx - 1) * 4));
@@ -260,7 +260,7 @@ void nfc_send_start_dma(uint8_t *data, uint16_t len)
 
         DMAx_CHANNELy(NFC_DMA, NFC_DMA_CHANNEL)->CFGR |= (DMA_IT_TC | DMA_IT_TE | DMA_CFGR1_EN);
 
-        /* ¿ªÊ¼ÖÐ¶Ï */
+        /* å¼€å§‹ä¸­æ–­ */
         TIMx(CTRL_REC_TIM)->INTFR = (~(TIM_IT_Update));
 
         TIMx(CTRL_REC_TIM)->DMAINTENR = 0x0101;
